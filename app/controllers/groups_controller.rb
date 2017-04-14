@@ -38,9 +38,9 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     if !current_user.is_member_of?(@group)
       current_user.join!(@group)
-      flash[notice:] = "加入本讨论组成功"
+      flash[:notice] = "加入本讨论组成功"
     else
-      flash[warning:] = "您已是本组成员"
+      flash[:alert] = "您已是本组成员"
     end
     redirect_to group_path(@group)
   end
@@ -48,11 +48,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     if current_user.is_member_of?(@group)
       current_user.quit!(@group)
-      flash[alert:] = "您已退出本讨论组"
+      flash[:alert] = "您已退出本讨论组"
     else
-      flash[warning:] = "您不是本讨论组成员，怎么退出 XD"
+      flash[:warn] = "您不是本讨论组成员，怎么退出 XD"
     end
-    redirect_to group_path(group)
+    redirect_to group_path(@group)
   end
   private
   def find_group_and_check_permission
