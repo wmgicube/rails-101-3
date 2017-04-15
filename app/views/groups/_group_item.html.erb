@@ -1,0 +1,12 @@
+<tr>
+  <td>#</td>
+  <td><%= link_to(gr.title, group_path(gr)) %></td>
+  <td><%= render_group_description(gr) %></td>
+  <td><%= gr.user.email %></td>
+  <td>
+    <% if current_user && current_user == gr.user %>
+      <%= link_to("Edit", edit_group_path(gr), class:"btn btn-sm btn-default")%>
+      <%= link_to("Delete", group_path(gr), class:"btn btn-sm btn-default", mothod: :delete, data: {confirm:"Are you sure?"})%>
+    <% end %>
+  </td>
+</tr>
